@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zepcha | One Fit Profile. Every Brand.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink:#241b3b;
+  --muted:#777084;
+  --pink:#ef5268;
+  --pink-dark:#d83b55;
+  --purple:#8065c7;
+  --cream:#fffaf6;
+  --lilac:#f0ebff;
+  --mint:#e1f6e9;
+  --peach:#ffe6df;
+  --yellow:#ffdc7a;
+  --line:#eee8ef;
+  --shadow:0 20px 60px rgba(36,27,59,.09);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  line-height:1.6;
+}
+h1,h2,h3,h4 { font-family:'Outfit',sans-serif; line-height:1.15; }
+a { text-decoration:none; color:inherit; }
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+.container { width:min(1160px,90%); margin:auto; }
+section { padding:90px 0; }
+.section-heading { text-align:center; max-width:700px; margin:0 auto 45px; }
+.section-heading .eyebrow { margin-bottom:12px; }
+.eyebrow {
+  color:var(--pink-dark);
+  font-size:.75rem;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.section-heading h2 { font-size:clamp(2rem,4vw,3.1rem); margin-bottom:14px; }
+.section-heading p { color:var(--muted); }
+.btn {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  border:0;
+  border-radius:13px;
+  padding:14px 23px;
+  font-weight:800;
+  transition:.25s;
+}
+.btn:hover { transform:translateY(-3px); }
+.btn-primary { background:var(--pink); color:white; box-shadow:0 9px 24px #ef526833; }
+.btn-primary:hover { background:var(--pink-dark); }
+.btn-light { background:white; border:1px solid var(--line); color:var(--ink); }
+.btn-dark { background:var(--ink); color:white; }
+header {
+  height:76px;
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#fffaf6ed;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.logo { font-family:'Outfit'; font-size:1.8rem; font-weight:900; letter-spacing:-1.5px; }
+.logo span { color:var(--pink); }
+.nav-links { display:flex; align-items:center; gap:25px; font-size:.87rem; font-weight:700; }
+.nav-links a:hover { color:var(--pink); }
+.menu-toggle { display:none; background:none; border:0; font-size:1.7rem; }
+.hero {
+  min-height:650px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:50px;
+  padding-top:65px;
+  padding-bottom:65px;
+}
+.hero h1 { font-size:clamp(3rem,6vw,5.5rem); letter-spacing:-3px; margin:18px 0; }
+.hero h1 span { color:var(--pink); }
+.hero-copy p { max-width:540px; color:var(--muted); font-size:1.05rem; line-height:1.8; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.hero-note { margin-top:20px; font-size:.8rem; color:var(--muted); }
+.hero-visual { position:relative; min-height:460px; display:grid; place-items:center; }
+.hero-circle {
+  width:min(420px,90%);
+  aspect-ratio:1;
+  border-radius:45% 55% 55% 45%;
+  background:linear-gradient(140deg,#ffe4dc,#e8ddff);
+  position:absolute;
+  animation:float 6s ease-in-out infinite;
+}
+.hero-card {
+  position:relative;
+  width:min(350px,90%);
+  padding:27px;
+  border-radius:25px;
+  background:#fff;
+  box-shadow:0 30px 90px #39265325;
+  transform:rotate(-4deg);
+  animation:float 5s ease-in-out infinite reverse;
+}
+.hero-card-top { display:flex; justify-content:space-between; align-items:center; }
+.hero-card-top strong { font-family:'Outfit'; font-size:1.15rem; }
+.avatar {
+  width:46px; height:46px; display:grid; place-items:center;
+  background:var(--yellow); border-radius:15px; font-weight:900;
+}
+.hero-card h3 { font-size:1.7rem; margin:25px 0 5px; }
+.hero-card p { color:var(--muted); font-size:.85rem; }
+.hero-measures { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:25px; }
+.hero-measures div { background:#f8f5fc; padding:13px; border-radius:13px; }
+.hero-measures small { display:block; color:var(--muted); font-size:.65rem; font-weight:800; }
+.hero-measures strong { font-size:1rem; }
+.float-tag {
+  position:absolute; padding:12px 18px; border-radius:15px;
+  background:white; box-shadow:var(--shadow); font-size:.82rem; font-weight:800;
+}
+.tag-one { top:12%; right:0; }
+.tag-two { bottom:12%; left:0; }
+@keyframes float { 50% { transform:translateY(-13px) rotate(1deg); } }
+
+.ticker { overflow:hidden; background:white; border-block:1px solid var(--line); padding:16px 0; }
+.ticker-track { width:max-content; display:flex; gap:35px; animation:marquee 25s linear infinite; color:#80788d; font-size:.78rem; font-weight:900; letter-spacing:2px; }
+.ticker-track span::after { content:" ✳"; color:var(--pink); margin-left:35px; }
+@keyframes marquee { to { transform:translateX(-50%); } }
+
+.feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.feature-card { background:white; border:1px solid var(--line); padding:27px; border-radius:22px; transition:.25s; }
+.feature-card:hover { transform:translateY(-7px); box-shadow:var(--shadow); }
+.feature-icon { width:52px; height:52px; display:grid; place-items:center; border-radius:16px; background:var(--peach); font-size:1.5rem; margin-bottom:18px; }
+.feature-card:nth-child(2) .feature-icon { background:var(--lilac); }
+.feature-card:nth-child(3) .feature-icon { background:var(--mint); }
+.feature-card h3 { margin-bottom:9px; }
+.feature-card p { color:var(--muted); font-size:.9rem; }
+
+.studio { background:linear-gradient(180deg,#fff,#f6f2ff); }
+.studio-grid { display:grid; grid-template-columns:1fr 1fr; gap:25px; align-items:start; }
+.panel { background:white; padding:28px; border:1px solid var(--line); border-radius:25px; box-shadow:var(--shadow); }
+.panel h3 { font-size:1.4rem; margin:8px 0; }
+.panel-intro { color:var(--muted); font-size:.88rem; margin-bottom:22px; }
+.measurement-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.field { display:grid; gap:7px; font-size:.82rem; font-weight:800; }
+.field input,.field select {
+  width:100%; padding:12px; border:1px solid var(--line);
+  border-radius:11px; outline:none; background:white; color:var(--ink);
+}
+.field input:focus,.field select:focus { border-color:var(--pink); box-shadow:0 0 0 3px #ef526815; }
+.field-hint { color:var(--muted); font-size:.73rem; margin-top:12px; }
+.fit-options { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:12px 0 20px; }
+.fit-option {
+  border:1px solid var(--line); border-radius:11px; padding:11px 5px;
+  background:white; font-weight:800; color:var(--ink);
+}
+.fit-option.active { background:#fff0f1; border-color:var(--pink); color:var(--pink-dark); }
+.full { width:100%; }
+.studio-results { display:grid; gap:18px; }
+.passport {
+  position:relative; overflow:hidden; padding:27px; color:white; border-radius:25px;
+  background:linear-gradient(135deg,#241b3b,#483064 70%,#79568e);
+  box-shadow:var(--shadow);
+}
+.passport:after {
+  content:"Z"; position:absolute; right:-10px; bottom:-105px;
+  font-size:18rem; font-family:'Outfit'; font-weight:900; color:#ffffff09;
+}
+.passport-top,.passport-bottom { display:flex; justify-content:space-between; gap:15px; align-items:center; }
+.passport-top strong { letter-spacing:2px; }
+.passport-top span,.passport-bottom small { font-size:.65rem; color:#d5cbe5; letter-spacing:1px; }
+.passport-title { margin:28px 0 5px; font-size:1.6rem; }
+.passport-desc { color:#d5cbe5; font-size:.8rem; }
+.passport-data { display:grid; grid-template-columns:repeat(2,1fr); gap:17px; padding:22px 0; margin-top:18px; border-block:1px solid #ffffff25; }
+.passport-data div { display:grid; gap:3px; }
+.passport-data small { font-size:.62rem; color:#c9bedb; letter-spacing:1px; }
+.passport-data strong { font-size:1rem; }
+.passport-bottom { margin-top:17px; }
+.recommendation { background:white; border:1px solid var(--line); border-radius:22px; padding:23px; }
+.recommendation h3 { margin:5px 0 20px; }
+.recommendation-result { display:flex; align-items:center; gap:16px; }
+.size-result { width:75px; height:75px; display:grid; place-items:center; background:var(--mint); color:#256b4b; border-radius:20px; font-size:2rem; font-weight:900; }
+.recommendation-result p { color:var(--muted); font-size:.82rem; margin-top:5px; }
+.disclaimer { font-size:.7rem; color:var(--muted); margin-top:17px; }
+
+.comparison { background:white; }
+.compare-controls { display:flex; flex-wrap:wrap; gap:14px; align-items:end; margin-bottom:18px; }
+.compare-controls .field { min-width:190px; }
+.table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:18px; }
+table { width:100%; border-collapse:collapse; min-width:600px; }
+th { text-align:left; background:#faf7fc; padding:16px; color:var(--muted); font-size:.7rem; text-transform:uppercase; letter-spacing:1px; }
+td { padding:17px 16px; border-top:1px solid var(--line); font-size:.86rem; }
+td small { display:block; color:var(--muted); }
+.size-pill { background:var(--lilac); color:#634e9c; padding:7px 12px; border-radius:9px; font-weight:900; }
+.table-note { color:var(--muted); font-size:.72rem; margin-top:12px; }
+
+.dashboard { background:#f8f5ff; }
+.account-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:25px; align-items:start; }
+.account-card,.dashboard-card { background:white; padding:27px; border-radius:24px; border:1px solid var(--line); box-shadow:var(--shadow); }
+.account-card h3 { font-size:1.5rem; margin:16px 0 8px; }
+.account-card p { color:var(--muted); font-size:.85rem; margin-bottom:18px; }
+.account-form { display:grid; gap:14px; }
+.account-form .field { margin:0; }
+.account-message { font-size:.75rem; color:var(--muted); margin-top:12px; }
+.dashboard-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.demo-label { background:var(--mint); color:#27744e; padding:7px 11px; border-radius:30px; font-size:.7rem; font-weight:800; }
+.dashboard-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:23px 0; }
+.dashboard-stat { background:#f8f5fc; padding:15px 12px; border-radius:14px; }
+.dashboard-stat small { display:block; color:var(--muted); font-size:.62rem; font-weight:900; }
+.dashboard-stat strong { display:block; margin-top:7px; font-size:.88rem; }
+.dashboard-row { display:flex; align-items:center; gap:13px; padding:15px 0; border-top:1px solid var(--line); }
+.dashboard-row .feature-icon { margin:0; width:40px; height:40px; font-size:1rem; flex-shrink:0; }
+.dashboard-row div:nth-child(2) { flex:1; }
+.dashboard-row small { display:block; color:var(--muted); font-size:.72rem; }
+
+.reviews { background:white; }
+.review-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.review-card { background:#fff; border:1px solid var(--line); padding:25px; border-radius:22px; transition:.25s; }
+.review-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+.stars { color:#e8b43e; letter-spacing:3px; }
+.review-card blockquote { margin:16px 0 22px; font-size:.9rem; color:#554d65; line-height:1.8; }
+.reviewer { display:flex; align-items:center; gap:11px; }
+.reviewer-avatar { width:40px; height:40px; border-radius:50%; display:grid; place-items:center; background:var(--peach); font-weight:900; }
+.reviewer small { display:block; color:var(--muted); font-size:.7rem; }
+
+.faq { background:var(--cream); }
+.faq-list { max-width:780px; margin:auto; display:grid; gap:12px; }
+details { background:white; border:1px solid var(--line); border-radius:15px; padding:18px 20px; }
+summary { cursor:pointer; font-weight:800; }
+details p { color:var(--muted); font-size:.86rem; padding-top:12px; }
+
+.cta {
+  background:linear-gradient(130deg,#281e43,#63457b);
+  color:white; text-align:center; border-radius:30px; padding:65px 25px;
+  position:relative; overflow:hidden;
+}
+.cta h2 { font-size:clamp(2rem,4vw,3rem); margin-bottom:14px; }
+.cta p { color:#e0d6eb; margin-bottom:25px; }
+footer { background:#211a34; color:white; padding:45px 0; }
+.footer-content { display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; }
+.footer-content p { color:#bcb3ca; font-size:.8rem; margin-top:10px; }
+.footer-links { display:flex; gap:20px; font-size:.85rem; }
+
+.reveal { opacity:0; transform:translateY(25px); transition:opacity .7s,transform .7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.progress { height:3px; position:fixed; top:0; left:0; width:0; z-index:200; background:linear-gradient(90deg,var(--pink),var(--purple),var(--yellow)); }
+.back-top {
+  position:fixed; right:20px; bottom:20px; width:45px; height:45px;
+  border:0; border-radius:50%; color:white; background:var(--ink);
+  opacity:0; pointer-events:none; transition:.2s; z-index:50;
+}
+.back-top.show { opacity:1; pointer-events:auto; }
+
+@media(max-width:900px) {
+  .nav-links { display:none; position:absolute; top:76px; left:0; right:0; background:white; padding:25px; flex-direction:column; border-bottom:1px solid var(--line); }
+  .nav-links.open { display:flex; }
+  .menu-toggle { display:block; }
+  .hero { grid-template-columns:1fr; text-align:center; }
+  .hero-copy p { margin:auto; }
+  .hero-actions { justify-content:center; }
+  .studio-grid,.account-grid { grid-template-columns:1fr; }
+  .feature-grid,.review-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px) {
+  section { padding:65px 0; }
+  .hero { padding-top:45px; }
+  .hero h1 { letter-spacing:-2px; }
+  .hero-visual { min-height:390px; }
+  .feature-grid,.review-grid { grid-template-columns:1fr; }
+  .measurement-grid { gap:10px; }
+  .panel,.account-card,.dashboard-card { padding:20px; }
+  .dashboard-stats { grid-template-columns:1fr; }
+  .passport-data { grid-template-columns:1fr 1fr; }
+  .footer-content { flex-direction:column; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; }
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">zepcha<span>.</span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#features">Features</a>
+      <a href="#fit-studio">Fit Studio</a>
+      <a href="#comparison">Brand Sizes</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#dashboard" class="btn btn-primary">Get Started →</a>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="container hero">
+  <div class="hero-copy reveal">
+    <div class="eyebrow">✳ The future of fashion sizing</div>
+    <h1>One fit profile.<br><span>Every brand.</span></h1>
+    <p>Meet Zepcha — your personal Fit Passport. Create one profile, understand brand sizing and shop online with more confidence.</p>
+    <div class="hero-actions">
+      <a href="#fit-studio" class="btn btn-primary">Create my Fit Passport →</a>
+      <a href="#features" class="btn btn-light">Explore features</a>
+    </div>
+    <div class="hero-note">✦ Less size-chart confusion. More confident shopping.</div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="hero-circle"></div>
+    <div class="hero-card">
+      <div class="hero-card-top"><strong>✳ ZEPCHA PASSPORT</strong><div class="avatar">Z</div></div>
+      <h3>Your fit, simplified.</h3>
+      <p>One profile that travels with your shopping journey.</p>
+      <div class="hero-measures">
+        <div><small>HEIGHT</small><strong>170 cm</strong></div>
+        <div><small>CHEST</small><strong>92 cm</strong></div>
+        <div><small>WAIST</small><strong>78 cm</strong></div>
+        <div><small>FIT</small><strong>Regular</strong></div>
+      </div>
+    </div>
+    <div class="float-tag tag-one">✦ Smart size assistant</div>
+    <div class="float-tag tag-two">♡ Your fit, your way</div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>ONE PROFILE</span><span>SMARTER SIZING</span><span>MORE CONFIDENCE</span><span>LESS GUESSWORK</span>
+    <span>ONE PROFILE</span><span>SMARTER SIZING</span><span>MORE CONFIDENCE</span><span>LESS GUESSWORK</span>
+  </div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">Why Zepcha?</div>
+      <h2>Shopping should fit you.</h2>
+      <p>A simple way to make online clothing sizes easier to understand.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card reveal"><div class="feature-icon">📏</div><h3>Smart Measurements</h3><p>Build a reusable profile with your body measurements.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">↔</div><h3>Brand Comparison</h3><p>Understand how size labels can vary from brand to brand.</p></article>
+      <article class="feature-card reveal"><div class="feature-icon">✦</div><h3>Fit Recommendations</h3><p>Explore size suggestions based on your measurements and fit preference.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="fit-studio">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">Your personal fit studio</div>
+      <h2>Build your Fit Passport.</h2>
+      <p>Enter your measurements, choose your preferred fit and preview your personalized profile.</p>
+    </div>
+
+    <div class="studio-grid">
+      <div class="panel reveal">
+        <div class="eyebrow">STEP 01 · YOUR MEASUREMENTS</div>
+        <h3>Tell us about your fit.</h3>
+        <p class="panel-intro">Enter measurements in centimetres. Keep your measuring tape comfortably snug.</p>
+
+        <div class="measurement-grid">
+          <label class="field">Height (cm)<input id="height" type="number" min="100" max="230" value="170"></label>
+          <label class="field">Weight (kg)<input id="weight" type="number" min="25" max="250" value="65"></label>
+          <label class="field">Chest / Bust (cm)<input id="chest" type="number" min="50" max="180" value="92"></label>
+          <label class="field">Waist (cm)<input id="waist" type="number" min="40" max="160" value="78"></label>
+          <label class="field">Hips (cm)<input id="hips" type="number" min="50" max="180" value="98"></label>
+          <label class="field">Shoulder (cm)<input id="shoulder" type="number" min="25" max="75" value="42"></label>
+        </div>
+        <p class="field-hint">Measurements are used by this front-end demo to show sample recommendations.</p>
+
+        <div style="margin-top:24px">
+          <div class="eyebrow">STEP 02 · PREFERRED FIT</div>
+          <h3 style="font-size:1.1rem;margin-top:7px">How do you like your clothes?</h3>
+          <div class="fit-options">
+            <button class="fit-option" data-fit="Slim">Slim</button>
+            <button class="fit-option active" data-fit="Regular">Regular</button>
+            <button class="fit-option" data-fit="Relaxed">Relaxed</button>
+          </div>
+        </div>
+        <button class="btn btn-primary full" id="generate">Generate my fit recommendation →</button>
+        <p class="field-hint" id="measurement-message" aria-live="polite">Your profile is ready to preview.</p>
+      </div>
+
+      <div class="studio-results">
+        <div class="passport reveal">
+          <div class="passport-top"><strong>✳ ZEPCHA</strong><span>YOUR DIGITAL FIT PASSPORT</span></div>
+          <div class="passport-title">Your Fit Passport</div>
+          <p class="passport-desc">A reusable snapshot of your fit preferences.</p>
+          <div class="passport-data">
+            <div><small>HEIGHT</small><strong id="p-height">170 cm</strong></div>
+            <div><small>CHEST / BUST</small><strong id="p-chest">92 cm</strong></div>
+            <div><small>WAIST</small><strong id="p-waist">78 cm</strong></div>
+            <div><small>HIPS</small><strong id="p-hips">98 cm</strong></div>
+          </div>
+          <div class="passport-bottom"><div><small>FIT PREFERENCE</small><strong id="p-fit">Regular</strong></div><div><small>PROFILE ID</small><strong id="p-code">ZP-0001</strong></div></div>
+        </div>
+
+        <div class="recommendation reveal">
+          <div class="eyebrow">ZEPCHA SIZE ASSIST</div>
+          <h3>Your sample recommendation</h3>
+          <div class="recommendation-result">
+            <div class="size-result" id="result-size">M</div>
+            <div><strong id="result-title">Medium may be a starting point</strong><p id="result-text">Based on your measurements and Regular fit preference.</p></div>
+          </div>
+          <p class="disclaimer">This is a simplified demonstration, not a trained AI model or guaranteed fit. Real recommendations need verified garment and brand sizing data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="comparison" id="comparison">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">One profile, different labels</div>
+      <h2>Compare sizes across brands.</h2>
+      <p>See how size labels may differ. The brands and mappings below are fictional demo data.</p>
+    </div>
+
+    <div class="compare-controls reveal">
+      <label class="field">Garment type
+        <select id="garment"><option value="top">Top / T-shirt</option><option value="bottom">Bottom / Jeans</option></select>
+      </label>
+      <label class="field">Profile
+        <select id="profile-choice"><option value="current">My Fit Passport</option><option value="sample">Sample profile</option></select>
+      </label>
+      <button class="btn btn-primary" id="compare-button">Update comparison ↻</button>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Brand example</th><th>Suggested size</th><th>Fit note</th><th>Result</th></tr></thead>
+        <tbody id="comparison-body"></tbody>
+      </table>
+    </div>
+    <p class="table-note">These fictional examples are only to demonstrate the comparison interface. Replace them with official, verified brand size charts before launch.</p>
+  </div>
+</section>
+
+<section class="dashboard" id="dashboard">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">Your Zepcha space</div>
+      <h2>Your style. Your profile.</h2>
+      <p>Preview a simple account experience and Fit Passport dashboard.</p>
+    </div>
+    <div class="account-grid">
+      <div class="account-card reveal">
+        <div class="feature-icon">♡</div>
+        <h3 id="account-title">Welcome to Zepcha</h3>
+        <p id="account-description">Sign in to preview your personal dashboard.</p>
+        <form id="login-form" class="account-form">
+          <label class="field">Email address<input id="email" type="email" placeholder="you@example.com" required></label>
+          <label class="field">Password<input id="password" type="password" minlength="6" placeholder="At least 6 characters" required></label>
+          <button class="btn btn-primary full" type="submit" id="login-button">Continue to demo dashboard →</button>
+        </form>
+        <div class="account-message" id="account-message" aria-live="polite">Demo login only. Never enter a real password here.</div>
+        <button class="btn btn-light full" id="logout" style="display:none;margin-top:12px">Sign out</button>
+      </div>
+
+      <div class="dashboard-card reveal">
+        <div class="dashboard-top">
+          <div><div class="eyebrow">DASHBOARD PREVIEW</div><h3 id="dashboard-greeting">Your style, your fit.</h3></div>
+          <span class="demo-label">● Demo</span>
+        </div>
+        <div class="dashboard-stats">
+          <div class="dashboard-stat"><small>FIT PASSPORT</small><strong id="dash-code">Not created</strong></div>
+          <div class="dashboard-stat"><small>PREFERRED FIT</small><strong id="dash-fit">Regular</strong></div>
+          <div class="dashboard-stat"><small>ACCOUNT</small><strong id="dash-account">Guest</strong></div>
+        </div>
+        <div class="dashboard-row"><div class="feature-icon">✦</div><div><strong>Fit Passport</strong><small>Your measurements in one place</small></div>→</div>
+        <div class="dashboard-row"><div class="feature-icon">↔</div><div><strong>Brand comparison</strong><small>Explore different size labels</small></div>→</div>
+        <div class="dashboard-row"><div class="feature-icon">♡</div><div><strong>Fit preferences</strong><small>Your preferred clothing fit</small></div>→</div>
+        <p class="table-note">Production login requires a secure backend, password hashing, authentication and protected data storage. This page does not implement real authentication.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">The Zepcha experience</div>
+      <h2>Less guessing. More confidence.</h2>
+      <p>Example review cards showing how real customer feedback could look.</p>
+    </div>
+    <div class="review-grid">
+      <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“I usually check three different size charts before ordering. A reusable profile would make shopping simpler.”</blockquote><div class="reviewer"><div class="reviewer-avatar">A</div><div><strong>Sample shopper A</strong><small>Illustrative testimonial</small></div></div></article>
+      <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“I love the idea of seeing size guidance that considers the brand instead of assuming every medium is the same.”</blockquote><div class="reviewer"><div class="reviewer-avatar" style="background:var(--lilac)">R</div><div><strong>Sample shopper B</strong><small>Illustrative testimonial</small></div></div></article>
+      <article class="review-card reveal"><div class="stars">★★★★★</div><blockquote>“A fit profile that I can reuse across stores could save time and reduce size confusion.”</blockquote><div class="reviewer"><div class="reviewer-avatar" style="background:var(--mint)">S</div><div><strong>Sample shopper C</strong><small>Illustrative testimonial</small></div></div></article>
+    </div>
+    <p class="table-note">These are placeholder testimonials, not genuine customer reviews. Replace them with approved real feedback before publishing.</p>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="eyebrow">Good to know</div>
+      <h2>Frequently asked questions.</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>What is a Zepcha Fit Passport?</summary><p>A reusable fit profile that helps translate body measurements into size guidance for participating fashion brands.</p></details>
+      <details><summary>Do I need to enter measurements every time?</summary><p>The goal is to create your profile once and reuse it across supported shopping experiences.</p></details>
+      <details><summary>Will the recommended size always be perfect?</summary><p>No tool can guarantee a perfect fit. Brand cuts, fabrics, garment types and personal preferences vary.</p></details>
+      <details><summary>Is the demo login secure?</summary><p>No. This page demonstrates a login interface only. A production application requires secure backend authentication.</p></details>
+      <details><summary>Does the demo use real AI?</summary><p>No. It uses simplified size thresholds to demonstrate the user experience. A real AI recommendation system needs a trained model and reliable product sizing data.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta reveal">
+      <div class="eyebrow" style="color:#ffcf78">YOUR FIT JOURNEY STARTS HERE</div>
+      <h2>Find your fit. Own your style.</h2>
+      <p>One profile designed to make every shopping decision feel easier.</p>
+      <a href="#fit-studio" class="btn btn-primary">Create your Fit Passport →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <div><a href="#" class="logo" style="color:white">zepcha<span>.</span></a><p>One fit profile. Every brand.</p></div>
+    <div class="footer-links"><a href="#features">Features</a><a href="#fit-studio">Fit Studio</a><a href="#faq">FAQ</a></div>
+    <p>© <span id="year"></span> Zepcha. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="back-top" id="back-top" aria-label="Back to top">↑</button>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let fitPreference = "Regular";
+  let passportCode = "0001";
+
+  // Mobile navigation
+  $("menu-toggle").addEventListener("click", () => {
+    $("nav-links").classList.toggle("open");
+  });
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => $("nav-links").classList.remove("open"));
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.12 });
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+  // Scroll progress and back-to-top
+  function scrollUI() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    $("progress").style.width = (max ? scrollY / max * 100 : 0) + "%";
+    $("back-top").classList.toggle("show", scrollY > 500);
+  }
+  addEventListener("scroll", scrollUI, {passive:true});
+  $("back-top").addEventListener("click", () => scrollTo({top:0,behavior:"smooth"}));
+  $("year").textContent = new Date().getFullYear();
+
+  // Fit preference buttons
+  document.querySelectorAll(".fit-option").forEach(button => {
+    button.addEventListener("click", () => {
+      fitPreference = button.dataset.fit;
+      document.querySelectorAll(".fit-option").forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
+      $("p-fit").textContent = fitPreference;
+      $("dash-fit").textContent = fitPreference;
+    });
+  });
+
+  function measurements() {
+    return {
+      height:Number($("height").value),
+      weight:Number($("weight").value),
+      chest:Number($("chest").value),
+      waist:Number($("waist").value),
+      hips:Number($("hips").value),
+      shoulder:Number($("shoulder").value)
+    };
+  }
+
+  function sizeFor(value, garment) {
+    // Illustrative size thresholds, not official brand size charts.
+    const metric = garment === "bottom" ? value.waist : value.chest;
+    let index = metric < 82 ? 0 : metric < 90 ? 1 : metric < 98 ? 2 : metric < 106 ? 3 : 4;
+    if (fitPreference === "Slim") index = Math.max(0,index-1);
+    if (fitPreference === "Relaxed") index = Math.min(4,index+1);
+    return ["XS","S","M","L","XL"][index];
+  }
+
+  // Fit Passport generator
+  function generatePassport() {
+    const m = measurements();
+    const required = ["height","chest","waist","hips"];
+    const valid = required.every(key => Number.isFinite(m[key]) && m[key] > 0);
+
+    if (!valid) {
+      $("measurement-message").textContent = "Please enter valid height, chest/bust, waist and hip measurements.";
+      return;
+    }
+
+    $("p-height").textContent = m.height + " cm";
+    $("p-chest").textContent = m.chest + " cm";
+    $("p-waist").textContent = m.waist + " cm";
+    $("p-hips").textContent = m.hips + " cm";
+    $("p-fit").textContent = fitPreference;
+
+    passportCode = String(Math.round(m.height*7 + m.waist*3 + m.hips)).slice(-4).padStart(4,"0");
+    $("p-code").textContent = "ZP-" + passportCode;
+    $("dash-code").textContent = "ZP-" + passportCode;
+
+    const size = sizeFor(m,"top");
+    $("result-size").textContent = size;
+    $("result-title").textContent = size + " may be a starting point";
+    $("result-text").textContent = "Illustrative " + fitPreference.toLowerCase() + " fit suggestion based on your chest/bust measurement.";
+
+    $("measurement-message").textContent = "Your Fit Passport preview has been updated.";
+    updateComparison();
+  }
+
+  $("generate").addEventListener("click",generatePassport);
+
+  // Brand size comparison demo
+  function updateComparison() {
+    const garment = $("garment").value;
+    const useSample = $("profile-choice").value === "sample";
+    const m = useSample
+      ? {height:170,weight:65,chest:92,waist:78,hips:98,shoulder:42}
+      : measurements();
+
+    const sizes = ["XS","S","M","L","XL"];
+    const base = sizes.indexOf(sizeFor(m,garment));
+    const rows = [
+      ["Northline","Regular fit reference",sizes[Math.min(4,base)]],
+      ["Thread & Co.","Runs a little smaller in this demo",sizes[Math.min(4,base+1)]],
+      ["Everyday Studio","Relaxed cut reference",sizes[Math.max(0,base-1)]]
+    ];
+
+    $("comparison-body").innerHTML = rows.map(row => `
+      <tr>
+        <td><strong>${row[0]}</strong><small>Demo brand</small></td>
+        <td><span class="size-pill">${row[2]}</span></td>
+        <td>${row[1]}</td>
+        <td style="color:#268b5d;font-weight:800">● Starting point</td>
+      </tr>`).join("");
+  }
+
+  $("compare-button").addEventListener("click",updateComparison);
+  $("garment").addEventListener("change",updateComparison);
+  $("profile-choice").addEventListener("change",updateComparison);
+
+  // Demo login - not real authentication.
+  $("login-form").addEventListener("submit",event => {
+    event.preventDefault();
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    if (!email || password.length < 6) {
+      $("account-message").textContent = "Enter a valid email and password of at least 6 characters.";
+      return;
+    }
+
+    const firstName = email.split("@")[0].split(/[._-]/)[0];
+    $("account-title").textContent = "Welcome, " + firstName + "!";
+    $("account-description").textContent = "Your Zepcha demo dashboard is ready.";
+    $("dashboard-greeting").textContent = "Welcome back, " + firstName + ".";
+    $("dash-account").textContent = "Demo user";
+    $("account-message").textContent = "Demo session started. Your password was not saved or transmitted.";
+    $("login-button").textContent = "Demo session active ✓";
+    $("logout").style.display = "block";
+
+    try { localStorage.setItem("zepcha_demo_email",email); } catch(error) {}
+  });
+
+  $("logout").addEventListener("click",() => {
+    try { localStorage.removeItem("zepcha_demo_email"); } catch(error) {}
+    $("account-title").textContent = "Welcome to Zepcha";
+    $("account-description").textContent = "Sign in to preview your personal dashboard.";
+    $("dashboard-greeting").textContent = "Your style, your fit.";
+    $("dash-account").textContent = "Guest";
+    $("account-message").textContent = "You have signed out of the demo.";
+    $("login-button").textContent = "Continue to demo dashboard →";
+    $("password").value = "";
+    $("logout").style.display = "none";
+  });
+
+  // Restore demo email only, never a password.
+  try {
+    const savedEmail = localStorage.getItem("zepcha_demo_email");
+    if (savedEmail) {
+      $("email").value = savedEmail;
+      $("account-title").textContent = "Welcome back!";
+      $("account-description").textContent = "Your local demo profile is available.";
+      $("dashboard-greeting").textContent = "Welcome back.";
+      $("dash-account").textContent = "Demo user";
+      $("account-message").textContent = "Demo profile restored in this browser.";
+      $("logout").style.display = "block";
+    }
+  } catch(error) {}
+
+  generatePassport();
+  updateComparison();
+})();
+</script>
+</body>
+</html>
